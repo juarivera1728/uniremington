@@ -1,0 +1,79 @@
+.col-size-3{
+    width: 33% !important;
+    float:left !important;
+}
+
+.col-size-3 img{
+    width: 100% !important;
+}
+
+#red-email{
+    margin: -10px 0px 10px 0px;
+}
+
+#top {
+    position: relative;
+    background-color: #fff;
+    padding: 30px;
+    margin: 0px 0px 2px 170px;
+}
+
+#bottom {
+    position: relative;
+    background-color: #4e73df;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {
+    float: left;
+    background-color: #4e73df;
+    padding: 5px;
+    width: 150px;
+    height: 650px;
+}
+
+#right {
+    float: right;
+    background-color: #4e73df;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background-color: #F2F4F7;
+    padding: 3px;
+}
+
+.left_content {
+    background-color: #F2F4F7;
+    padding: 3px;
+    margin-left: 170px;
+}
+
+.right_content {
+    background-color: #F2F4F7;
+    padding: 3px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+.ui-menubar .ui-menuitem {
+    width:auto !important;
+    clear:left !important;
+
+}
+
+

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/TDT/xhtml-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <p:growl id="MSJ"/>
+<div class="ui-panel-titlebar ui-widget-header  ui-corner-all">
+            <center>
+                <h2>
+            <h:outputText value="USUARIOS"></h:outputText>
+            </h2>
+            </center>
+            </div>
+            <br/>
+            <h:form id="d">
+                <p:commandButton icon="ui-icon-plusthick" value="Nuevo" onclick="PF('action').show()" actionListener="#{usuarioController.setAccion('R')}" update=":da" />
+               <h:commandLink>
+                    <p:graphicImage url="../../img/xlsx.png" width="24" style="float:right"/>
+                    <p:dataExporter type="xls" target="datalist" fileName="Usuarios" />
+                </h:commandLink>
+                <h:commandLink>
+
+                    <p:graphicImage url="../../img/pdf.png" width="24" style="float:right"/>
+                    <p:dataExporter type="pdf" target="datalist" fileName="Usuarios" />
+                </h:commandLink>
+                <p:separator/>
+ 
+                <p:dataTable var="item" value="#{usuarioController.listausuario}" emptyMessage="Ninguna Categoria Registrada">
+                    <p:column headerText="Usuario"  filterBy="#{item.usuCorreo}" filterMatchMode="contains">
+                        <h:outputText value="#{item.usuCorreo}" />
+                    </p:column>
+                    <p:column headerText="Contraseña">
+                        <h:outputText value="#{item.usuContrasena}" />
+                    </p:column>
+                    <p:column headerText="Persona">
+                        <h:outputText value="#{item.perId.perNombre}" />
+                    </p:column>
+                    <p:column headerText="Fecha Creacion">
+                        <h:outputText value="#{item.usuCreacion}" />
+                    </p:column>       
+                    <p:column headerText="Rol">
+                        <h:outputText value="#{item.rolId.rolNombre}" />
+                    </p:column>
+
+
+                    <p:column headerText="Acciones">
+                        <p:commandLink  actionListener="#{usuarioController.cargarId(item,item.perId.id,item.estId.id,item.rolId.id)}"  update=":da" oncomplete="PF('action').show()"  >
+                            <p:graphicImage library="imagenes" name="editar.jpg"/>
+                        </p:commandLink>
+
+
+
+
+                        <p:commandLink    actionListener="#{usuarioController.eliminar(item)}"  update=":MSJ :d" >
+                            <p:graphicImage library="imagenes" name="eliminar.png"/>
+                        </p:commandLink>
+                    </p:column>
+
+                </p:dataTable>    
+            </h:form>
+
+            <p:dialog widgetVar="action" modal='true' resizable="false" header="Nuevo Usuario" closeOnEscape="true">
+
+                <p:ajax event="close" listener="#{usuarioController.limpiar()}" update=":da"/>
+
+                <h:form id="da">
+                    <p:panelGrid columns="2">
+                         <h:outputLabel for="txtp" value="Seleccione Persona" />
+                            <p:selectOneMenu id="txtp" value="#{usuarioController.idPersona}">
+                            <f:selectItems value="#{personaController.listaPersona}" var="p" 
+                                           itemLabel="#{p.perNombre}" itemValue="#{p.id}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Correo" for="nombre" />
+                        <p:inputText id="nombre" value="#{usuarioController.usuario.usuCorreo}" required="true" />
+                        <p:outputLabel for="clave1" value="Contraseña" />
+                        <p:password id="clave1" value="#{usuarioController.usuario.usuContrasena}" validatorMessage="Las Claves no coinciden" weakLabel="Débil" strongLabel="Fuerte" goodLabel="Bueno" required="true" label="clave2"  feedback="true" promptLabel="Ingrese una clave" /> 
+                        
+                        <p:outputLabel for="clave2" value="Repetir clave" />
+                        <p:password id="clave2" required="true" requiredMessage="campo requerido"/>
+                       
+                    
+                        <h:outputLabel for="txtp2" value="Seleccione Estado" />
+                        <p:selectOneMenu id="txtp2" value="#{usuarioController.idEstados}">
+                            <f:selectItems value="#{estadosController.listaEstados}" var="e" 
+                                         itemLabel="#{e.estNombre}" itemValue="#{e.id}" />
+                        </p:selectOneMenu>
+                          <h:outputLabel for="txtp1" value="Seleccione Rol" />                 
+                        <p:selectOneMenu id="txtp1" value="#{usuarioController.idRol}">
+                            <f:selectItems value="#{rolController.listaRol}" var="t" 
+                                           itemLabel="#{t.rolNombre}" itemValue="#{t.id}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Fecha de Creacion"  />
+                        <p:calendar  value="#{usuarioController.usuario.usuCreacion}"  /> 
+                       
+                        <p:commandButton icon="ui-icon-check" value="Registrar" actionListener="#{usuarioController.guardar()}" update=":da :MSJ" oncomplete="PF{'action').hide()" rendered="#{usuarioController.accion=='R'}"/>
+                        <p:commandButton icon="ui-icon-check" value="Modificar" actionListener="#{usuarioController.editar()}" update=":da :MSJ" oncomplete="PF{'action').hide()" rendered="#{usuarioController.accion=='M'}"/>
+                        <p:commandButton value="Cancelar" icon="ui-icon-close"  immediate="true" onclick="PF('action').hide()" />
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+
+</html>

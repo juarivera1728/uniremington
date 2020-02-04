@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templater.xhtml">
+        <ui:define name="body">
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <h:form>
+                <div class="ui-panel-titlebar ui-widget-header  ui-corner-all">
+            <center>
+                <h2>
+            <h:outputText value="GRAFICO DE PROMOCIONES"></h:outputText>
+            </h2>
+            </center>
+            </div>
+                <p:growl id="growl" showDetail="true"/>
+                
+                  <h:panelGrid >
+                      <p:chart type="pie" model="#{promocionController.torta}" style="width:700px;" />
+
+                </h:panelGrid>
+                 <p:separator/>
+                 <p:dataTable style="width:60%" value="#{promocionController.listado}" var="fila">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Bar"/>
+                        </f:facet>
+                        <h:outputText value="#{fila[0]}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Numero de Promociones"/>
+                        </f:facet>
+                         <h:outputText value="#{fila[1]}"/>
+                    </p:column>
+                
+                </p:dataTable>
+               
+               
+
+            </h:form>
+        </h:body>
+            </ui:define>
+    </ui:composition>
+</html>
+

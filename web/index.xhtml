@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Barvill</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+
+        <!-- Custom fonts for this template-->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+
+        <!-- Custom styles for this template-->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+        <link href="css/custom.css" rel="stylesheet" />
+
+    </head>
+
+    <body id="page-top">
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.xhtml">
+                    <img src="img/logo-barvill.png" alt="" class="img-responsive logo-main" />
+                </a>
+
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Inicio</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider" />
+
+                <!-- Heading -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Reserva Bar</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Reservas</h6>
+
+                            <a class="collapse-item" href="./faces/pages/reservaCliente/listar.xhtml" >Crear Reserva</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Ver Promociones </span>
+                    </a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Promociones</h6>
+
+                            <a class="collapse-item" href="./faces/pages/promocionesCliente/Promociones.xhtml" >Ver promociones</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block" />
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>        
+            </ul>
+
+
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        <!-- Topbar Search -->
+
+
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <a href="faces/LoginP.xhtml" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Iniciar Sesion</a>
+
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+
+
+                            <!-- Nav Item - Alerts -->
+
+
+                            <!-- Nav Item - Messages -->
+
+
+                            <div class="topbar-divider d-none d-sm-block">
+
+                            </div>
+
+                            <!-- Nav Item - User Information -->
+
+
+                        </ul>
+
+                    </nav>
+                    <!-- End of Topbar -->
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Ubica los <b>Bares</b></h1>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 mb-12">
+                                <div id="map" style="height:450px;width:100%"></div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <!-- Page Heading -->
+                        <!--
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Ultimos <b>Bares</b></h1>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        </div>
+                        -->
+                        <!-- Content Row -->
+                        <div class="row" id="lstBares">
+                        </div>
+
+                    </div>
+                    <!-- End of Main Content -->
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; barvill 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">�</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Binding data-->
+        <script type="text/html" id="bar-each">
+            <div class="col-lg-4 mb-3">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary" escape="false">
+                            <h:outputText escape="false" value="#{barController.print('nombre')}"></h:outputText>
+                                        </h6>
+                        
+                                    </div>
+                       <div class="card-body">
+                           <img class="img-fluid" style="width:100%;" src="img/bars/irishpub.jpg"  />
+                           
+                            <p><h:outputText escape="false" value="#{barController.print('descripcion')}"></h:outputText></p>
+                                        <h:outputText  class="barData" escape="false" value="#{barController.serialize()}"></h:outputText>
+                                            <h:outputLink class="detailLink" rel="nofollow" value="detail.xhtml">Ver detalle</h:outputLink>
+                                        </div>
+                                    </div>
+                                </div> 
+           
+          
+        </script>
+ 
+        <!-- Binding data -->
+        <!-- Binding data -->
+        <!-- Binding data -->
+        <input type="text" id="listBars"  value="#{barController.json}" />
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaZPOrU-btg2Mhhn7bAm7dl2eChwHfXEY"></script>
+        <script src="js/barvill.js"></script>
+        <script>
+$(document).ready(function () {
+    Barvill.Module.initMap();
+    Barvill.View.LoadBars();
+    Barvill.Module.loadMarkers();
+    $("#listBars").hide();
+    $("#javax_faces_developmentstage_messages").hide();
+
+});
+        </script>
+
+        <br />
+
+    </body>
+
+
+
+
+
+</html>

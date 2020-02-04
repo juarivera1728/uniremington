@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/TDT/xhtml-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+      <ui:composition template="/templater.xhtml">
+        <ui:define name="body">
+            <p:growl id="MSJ"/>
+<div class="ui-panel-titlebar ui-widget-header  ui-corner-all">
+            <center>
+                <h2>
+            <h:outputText value="RESERVAS"></h:outputText>
+            </h2>
+            </center>
+            </div>
+             <br/>
+            <h:form id="d">
+                <p:commandButton icon="ui-icon-plusthick" value="Nuevo" onclick="PF('action').show()" actionListener="#{reservaController.setAccion('R')}" update=":da" />
+                <p:separator/>
+
+                <p:dataTable var="item" value="#{reservaController.listaReservaC}" emptyMessage="Ninguna Categoria Registrada">
+                    <p:column headerText="Nombre del Bar"  filterBy="#{item.barId.barNombre}" filterMatchMode="contains">
+                        <h:outputText value="#{item.barId.barNombre}" />
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{item.resNombre}" />
+                    </p:column>
+                   
+                 <p:column headerText="Fecha Creacion">
+                       <h:outputText value="#{item.resCreacion}" >
+                      <f:convertDateTime type="date" timeZone="CST" pattern="YYYY-MM-dd  HH:mm:ss" />
+                     </h:outputText>
+                    </p:column>
+                    
+                  
+                 
+                    
+                </p:dataTable>    
+            </h:form>
+
+            <p:dialog widgetVar="action" modal='true' resizable="false" header="Nueva Reserva" closeOnEscape="true">
+
+                <p:ajax event="close" listener="#{reservaController.limpiar()}" update=":da"/>
+
+                <h:form id="da">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Nombre" for="nombre" />
+                        <p:inputText id="nombre" value="#{reservaController.reserva.resNombre}" required="true" />
+                        <p:outputLabel value="Telefono"  />
+                        <p:inputText  value="#{reservaController.reserva.resTelefono}"  />         
+                        <p:outputLabel value="Correo"  />
+                        <p:inputText  value="#{reservaController.reserva.resCorreo}"  />    
+                       <p:outputLabel value="Fecha de reserva"  />
+                       <p:calendar  value="#{reservaController.reserva.resCreacion}"  /> 
+                         <h:outputLabel for="txtp" value="Seleccione" />
+                         <p:selectOneMenu id="txtp" value="#{reservaController.barId}">
+                             <f:selectItems value="#{barController.listabar}" var="t" 
+                                            itemLabel="#{t.barNombre}" itemValue="#{t.id}" />
+                        </p:selectOneMenu>
+                        
+                         <p:commandButton icon="ui-icon-check" value="Registrar" actionListener="#{reservaController.guardar()}" update=":da :MSJ" oncomplete="PF{'action').hide()" rendered="#{reservaController.accion=='R'}"/>
+
+                        <p:commandButton value="Cancelar" icon="ui-icon-close"  immediate="true" onclick="PF('action').hide()" />
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+
+</html>

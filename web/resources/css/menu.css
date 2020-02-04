@@ -1,0 +1,13 @@
+.ui-menubar .ui-menuitem {
+    width:auto !important;
+    clear:left !important;
+    
+}
+.col-size-3{
+    width: 33% !important;
+    float:left !important;
+}
+
+.col-size-3 img{
+    width: 100% !important;
+}

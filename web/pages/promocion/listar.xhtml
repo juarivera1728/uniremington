@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/TDT/xhtml-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <p:growl id="MSJ"/>
+<div class="ui-panel-titlebar ui-widget-header  ui-corner-all">
+            <center>
+                <h2>
+            <h:outputText value="PROMOCIONES"></h:outputText>
+            </h2>
+            </center>
+            </div>  
+            <br/>
+            <h:form id="d">
+                <p:commandButton icon="ui-icon-plusthick" value="Nuevo" onclick="PF('action').show()" actionListener="#{promocionController.setAccion('R')}" update=":da" />
+                <h:commandLink>
+                    <p:graphicImage url="../../img/xlsx.png" width="24" style="float:right"/>
+                    <p:dataExporter type="xls" target="datalist" fileName="Promocion" />
+                </h:commandLink>
+                <h:commandLink>
+
+                    <p:graphicImage url="../../img/pdf.png" width="24" style="float:right"/>
+                    <p:dataExporter type="pdf" target="datalist" fileName="Promocion" />
+                </h:commandLink>
+                <p:separator/>
+
+                <p:dataTable  id="datalist" var="item" value="#{promocionController.findPromocionesxUsuario()}" emptyMessage="Ninguna Categoria Registrada">
+                    <p:column headerText="Bar"  filterBy="#{item.barId}" filterMatchMode="contains">
+                        <h:outputText value="#{item.barId.barNombre}" />
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{item.promDescripcion}" />
+                    </p:column>
+                    <p:column headerText="Acciones">
+                        <p:commandLink  actionListener="#{promocionController.cargarId(item,item.barId.id)}"  update=":da" oncomplete="PF('action').show()"  >
+                            <p:graphicImage library="imagenes" name="editar.jpg"/>
+                        </p:commandLink>
+
+
+
+
+                        <p:commandLink    actionListener="#{promocionController.eliminar(item)}"  update=":MSJ :d" >
+                            <p:graphicImage library="imagenes" name="eliminar.png"/>
+                        </p:commandLink>
+                    </p:column>
+
+                </p:dataTable>    
+            </h:form>
+
+            <p:dialog widgetVar="action" modal='true' resizable="false" header="Nueva Promocion" closeOnEscape="true">
+
+                <p:ajax event="close" listener="#{promocionController.limpiar()}" update=":da"/>
+
+                <h:form id="da">
+                    <p:panelGrid columns="2">
+                        <h:outputLabel for="txtp" value="Seleccione" />
+                        <p:selectOneMenu id="txtp" value="#{promocionController.barId}">
+                            <f:selectItems value="#{barController.itemsAvailableSelectOne}" var="t" 
+                                           itemLabel="#{t.barNombre}" itemValue="#{t.id}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Descripcion"  />
+                        <p:inputText  value="#{promocionController.promocion.promDescripcion}"  />    
+
+
+
+                        <p:commandButton icon="ui-icon-check" value="Registrar" actionListener="#{promocionController.guardar()}" update=":da :MSJ" oncomplete="PF{'action').hide()" rendered="#{promocionController.accion=='R'}"/>
+                        <p:commandButton icon="ui-icon-check" value="Modificar" actionListener="#{promocionController.editar()}" update=":da :MSJ" oncomplete="PF{'action').hide()" rendered="#{promocionController.accion=='M'}"/>
+                        <p:commandButton value="Cancelar" icon="ui-icon-close"  immediate="true" onclick="PF('action').hide()" />
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+
+</html>
